@@ -3,8 +3,9 @@
   <MessageInput v-model="msg" />
   <p>{{ message }}</p>
   <button v-on:click="addMessageToMessages()">Hinzufügen</button>
-  <p v-for="item in messages" :key="item">
-    {{ item }}
+  <p v-for="(item, index) in messages" :key="item">
+    {{ index + ". " + item }}
+    <button v-on:click="removeMessage(index)">x</button>
   </p>
 </template>
 
@@ -26,6 +27,10 @@ export default class App extends Vue {
 
   addMessageToMessages(): void {
     this.messages.push(this.msg);
+  }
+
+  removeMessage(index: number): void {
+    this.messages.splice(index, 1);
   }
 }
 </script>
